@@ -1,0 +1,41 @@
+.detail-surah-action{
+    &__container{
+        width: 85vw;
+        padding: 0.5rem 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $surah-menu-color;
+        border-radius: 0.5rem;
+
+        .numbering-border{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: $primary-color;
+            border-radius: 50%;
+
+            p{
+                font-size: 0.8rem;
+                color: $text-white;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__menu{
+        display: flex;
+        gap: 0.5rem;
+        color: $primary-color;
+        font-size: 1.5rem;
+
+        svg{
+            cursor: pointer;
+        }
+        svg:hover{
+            transform: scale(1.1);
+        }
+    }
+}

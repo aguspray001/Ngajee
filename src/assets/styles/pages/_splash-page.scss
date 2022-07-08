@@ -1,0 +1,21 @@
+@import "assets/styles/_color.scss";
+
+.splash{
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h1{
+            color: $primary-color;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        p{
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    all: unset;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: $font-generic-style;
+}
+
+.shadow{
+    box-shadow: 10px 10px 48px -10px rgba(140,0,130,0.58);
+-webkit-box-shadow: 10px 10px 48px -10px rgba(140,0,130,0.58);
+-moz-box-shadow: 10px 10px 48px -10px rgba(140,0,130,0.58);
+}
+
+.img-cover{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.container {
+    max-width: 680px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem 0rem;
+
+    @include sm{
+        padding: 2rem 4rem;
+    }
+}

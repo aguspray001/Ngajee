@@ -1,0 +1,43 @@
+@import "assets/styles/_color.scss";
+
+.surah{
+    
+    &__container{
+        position: relative;
+        width: 90vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-image: linear-gradient(to bottom right, #C37EEE, $primary-color);
+        padding: 1rem 1rem;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        @include sm{
+            width: 40vw;
+        }
+        
+        & .surah{
+            &__content{
+                padding: 1rem 1rem;
+                margin-right: 7.2rem;
+                color: $text-white;
+
+                p:first-child{
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+        & img{
+            display: block;
+            position: absolute;
+            z-index: 2;
+            bottom: 0;
+            right: -1.5rem;
+        }
+    }
+    
+}

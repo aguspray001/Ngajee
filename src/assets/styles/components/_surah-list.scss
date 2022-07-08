@@ -1,0 +1,67 @@
+.surah-list{
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid $text-grey;
+        margin-bottom: 1rem;
+        cursor: pointer;
+
+        .surah-list{
+            &__content{
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+
+                .numbering{
+                    &__container{
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .numbering{
+
+                            &__border{
+                                position: absolute;
+                                z-index: 2;
+                                height: 2rem;
+                            }
+                            &__item{
+                                position:absolute;
+                                z-index: 3;
+                                color: $text-primary-alt;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+
+                .description{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+
+                    p:first-child{
+                        font-weight: 600;
+                    }
+                    p:last-child{
+                        font-size: 0.7rem;
+                        font-weight: 500;
+                        color: $text-grey;
+                    }
+                }
+            }
+
+            &__title{
+                color: $text-primary;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &__container:hover{
+        opacity: 0.6;
+    }
+}

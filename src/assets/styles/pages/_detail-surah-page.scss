@@ -1,0 +1,12 @@
+.detail-surah-page{
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .card{
+            margin-bottom: 2rem;
+        }
+
+    }
+}

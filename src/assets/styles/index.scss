@@ -1,0 +1,19 @@
+// utilities
+@import "_color.scss";
+@import "_font.scss";
+@import "_breakpoints";
+@import "_base.scss";
+
+// components
+@import "components/_button.scss";
+@import "components/_splash-card.scss";
+@import "components/_surah-card.scss";
+@import "components/_surah-list.scss";
+@import "components/_detail-surah-card.scss";
+@import "components/_detail-surah-action.scss";
+@import "components/_ayah-content.scss";
+
+// pages
+@import "pages/_splash-page.scss";
+@import "pages/_home-page.scss";
+@import "pages/_detail-surah-page.scss";

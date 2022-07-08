@@ -1,0 +1,36 @@
+.detail-surah-card{
+    &__container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 85vw;
+        padding: 1rem 2rem;
+        text-align: center;
+        gap: 1rem;
+        background-image: linear-gradient(to bottom right, #C37EEE, $primary-color);
+        border-radius: 1rem;
+        color: $text-white;
+        position: relative;
+        overflow: hidden;
+
+        img{
+            position: absolute;
+            z-index: 2;
+            width: 8rem;
+            height: auto;
+            bottom: 0;
+            right: 0;
+            mix-blend-mode:soft-light;
+
+            @include md{
+                width: 10rem;
+            }
+        }
+    }
+
+    &__title{
+        padding: 1rem 0;
+        border-bottom: 1px solid $text-grey;
+    }
+}
