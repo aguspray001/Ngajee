@@ -7,21 +7,21 @@
         justify-content: center;
         align-items: center;
         border-radius: 1rem;
-        min-width: 70vw;
-        height: 66vh;
+        width: 70vw;
+        height: 68vh;
         position: relative;
         background-color: $primary-color;
 
         @include sm {
-            min-width: 40vw;
+            width: 40vw;
         }
 
         @include lg {
-            min-width: 30vw;
+            width: 30vw;
         }
 
         @include xl {
-            min-width: 25vw;
+            width: 25vw;
         }
     }
 
