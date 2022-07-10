@@ -1,23 +1,31 @@
 import Button from 'components/atoms/Button';
 import React from 'react'
 import { AiOutlineShareAlt } from 'react-icons/ai';
-import { BsPlay } from 'react-icons/bs';
+import { BsPause, BsPlay } from 'react-icons/bs';
 import { HiOutlineSave } from 'react-icons/hi';
 
-const DetailSurahAction = () => {
+interface DetailSurahActionProps{
+    onShare?: ()=> void,
+    onPlay?: ()=> void,
+    onSave?: ()=> void,
+    playState: Boolean,
+    number: Number,
+}
+
+const DetailSurahAction = ({onShare, onPlay, onSave, playState, number}:DetailSurahActionProps): JSX.Element => {
   return (
     <div className='detail-surah-action__container'>
         <div className='numbering-border'>
-            <p>1</p>
+            <p>{number.toString()}</p>
         </div>
         <div className='detail-surah-action__menu'>
-            <Button type={"icon"} onClick={()=>console.log("share")}>
+            <Button type={"icon"} onClick={onShare}>
                 <AiOutlineShareAlt/>
             </Button>
-            <Button type={"icon"} onClick={()=>console.log("play")}>
-                <BsPlay/>
+            <Button type={"icon"} onClick={onPlay}>
+                {playState? <BsPause/> : <BsPlay/>}
             </Button>
-            <Button type={"icon"} onClick={()=>console.log("save")}>
+            <Button type={"icon"} onClick={onSave}>
                 <HiOutlineSave/>
             </Button>
         </div>

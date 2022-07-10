@@ -3,9 +3,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
         
         .card{
-            margin-bottom: 2rem;
+            margin: 0 auto 4rem auto;
+        }
+
+        .pagging{
+            position: absolute;
+            z-index: 3;
+            right: 1.7rem;
+            top: 14rem;
+
+            @include md{
+                right: 0rem;
+            }
         }
 
     }

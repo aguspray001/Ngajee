@@ -7,10 +7,10 @@ const SplashCard = () => {
     <div className='card__container shadow'>
         <div className="card__content">
             <img className='img__icon' src={quranIcon} alt='quran-icon'/>
-            <img className='img-cover' src={cardBackground} alt='card-background'/>
+            {/* <img className='img-cover' src={cardBackground} alt='card-background'/> */}
         </div>
         <div className='card__button'>
-            <Button className={["secondary", "borderless"]} type="internal-link" href={"/home"}>Getting Started</Button>
+            <Button className={["secondary"]} type="internal-link" href={"/home"}>Getting Started</Button>
         </div>
     </div>
   )

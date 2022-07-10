@@ -16,7 +16,7 @@ const MainApp = () => {
         <Routes>
             <Route path='/' element={<SplashPage/>} />
             <Route path='/home' element={<HomePage/>} />
-            <Route path='/detail' element={<DetailSurahPage/>} />
+            <Route path='/detail/:id' element={<DetailSurahPage/>} />
         </Routes>
     </Router>
   )
