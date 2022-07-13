@@ -31,7 +31,6 @@
                             &__item{
                                 position:absolute;
                                 z-index: 3;
-                                color: $text-primary-alt;
                                 font-weight: 600;
                             }
                         }
@@ -55,7 +54,6 @@
             }
 
             &__title{
-                color: $text-primary;
                 font-weight: 600;
             }
         }

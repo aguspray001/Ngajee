@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
     BrowserRouter as Router,
@@ -11,6 +11,11 @@ import HomePage from './HomePage';
 import SplashPage from './SplashPage';
 
 const MainApp = () => {
+  // useEffect(() => {
+  //   // document.body.classList.add('dark')
+  // }, [])
+  
+  console.log(document.body)
   return (
     <Router>
         <Routes>

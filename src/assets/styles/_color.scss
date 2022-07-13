@@ -13,3 +13,10 @@ $text-primary-alt: #2e0d8a;
 // boder
 $border-primary-color: #ffffff;
 $border-secondary-color: #000000;
+// dark mode
+$darkmode-bg: #1A1A40;
+
+@mixin colormode($bg-color, $text-color){
+    background-color: $bg-color;
+    color: $text-color;
+}
