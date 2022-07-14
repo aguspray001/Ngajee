@@ -1,5 +1,5 @@
 import Button from 'components/atoms/Button';
-import React from 'react'
+import React, { useRef } from 'react'
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import { BsPause, BsPlay } from 'react-icons/bs';
 import { HiOutlineSave } from 'react-icons/hi';
@@ -12,8 +12,11 @@ interface DetailSurahActionProps{
     number: Number,
 }
 
-const DetailSurahAction = ({onShare, onPlay, onSave, playState, number}:DetailSurahActionProps): JSX.Element => {
-  return (
+const DetailSurahAction = React.memo(({onShare, onPlay, onSave, playState, number}:DetailSurahActionProps): JSX.Element => {
+    // const renders = useRef(0);
+    // console.log("re-rendering => ", renders.current++)
+
+    return (
     <div className='detail-surah-action__container'>
         <div className='numbering-border'>
             <p>{number.toString()}</p>
@@ -31,6 +34,6 @@ const DetailSurahAction = ({onShare, onPlay, onSave, playState, number}:DetailSu
         </div>
     </div>
   )
-}
+})
 
-export default DetailSurahAction
+export default DetailSurahAction;
