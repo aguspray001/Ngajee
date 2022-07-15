@@ -15,7 +15,6 @@ const MainApp = () => {
   //   // document.body.classList.add('dark')
   // }, [])
   
-  console.log(document.body)
   return (
     <Router>
         <Routes>

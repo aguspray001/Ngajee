@@ -29,13 +29,14 @@ const DetailSurahPage = () => {
     const [playAyah, setPlayAyah] = useState<{ayahId: Number | null, playState: Boolean}>({ayahId: null, playState: false});
     const [ayahURL, setAyahURL] = useState("");
     const [page, setPage] = useState(1)
-    const { id } = useParams();
     const audioRef = useRef<HTMLAudioElement>(null);
+    const { id } = useParams();
 
     const fetchDataVerses = async (page:Number) => {
         try {
             const verses = await instance.get(BASE_API_URL + `/verses/by_chapter/${id}?language=en&words=true&page=${page}&per_page=10`);
             const ayah = await instance.get(BASE_API_URL + `/quran/verses/uthmani?chapter_number=${id}`);
+            const recitations = await instance.get(BASE_API_URL + `/recitations/1/by_chapter/${id}`);
 
             const fixedAyah = ayah.data.verses
             .filter((verse: any, i: any) => {
@@ -58,7 +59,8 @@ const DetailSurahPage = () => {
                     verseNumber: verse.verse_number,
                     // words: verse.words,
                     text: fixedAyah[i].textUtsmani,
-                    verseKey: fixedAyah[i].verse_key
+                    verseKey: fixedAyah[i].verse_key,
+                    audioFiles: recitations.data.audio_files[i].url
                 }
             })
 
@@ -68,15 +70,14 @@ const DetailSurahPage = () => {
         }
     }
 
-    const playAudioByAyahId = (id:Number) => {
+    const onChangeAudio = (id:Number, ayahURL:any) => {
         setPlayAyah({ayahId: id,  playState: !playAyah.playState});
+        setAyahURL(ayahURL);
         // console.log("testing")
     }
 
     const playAudio = async() => {
         if(playAyah.ayahId !== null){
-            const resp = await instance.get(BASE_API_URL + `/recitations/3/by_ayah/${playAyah.ayahId}`)
-            setAyahURL(resp.data.audio_files[0].url)
             if(playAyah.playState){
                 audioRef?.current?.play();
             }else{
@@ -84,7 +85,7 @@ const DetailSurahPage = () => {
             } 
         }
     }
-    
+
     useEffect(() => {
         playAudio();
     }, [playAyah]);
@@ -125,8 +126,12 @@ const DetailSurahPage = () => {
                     dataVerses.verses.map((verse: any, key) => {
                         return (
                             <React.Fragment key={key}>
-                                {ayahURL !== "" && <audio ref={audioRef} src={AUDIO_URL + ayahURL}/>}
-                                <DetailSurahAction number={verse.verseNumber} playState={(verse.id === playAyah.ayahId) && playAyah.playState} onPlay={()=>playAudioByAyahId(verse.id)}/>
+                                <audio ref={audioRef} src={AUDIO_URL + ayahURL}/>
+                                <DetailSurahAction 
+                                    number={verse.verseNumber} 
+                                    playState={(verse.id === playAyah.ayahId) && playAyah.playState} 
+                                    onPlay={()=>onChangeAudio(verse.id, verse.audioFiles)}
+                                />
                                 <AyahContent ayah={verse.text} meaning={""} />
                             </React.Fragment>
                         )
