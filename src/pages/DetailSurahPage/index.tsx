@@ -1,79 +1,25 @@
-import { instance } from 'api/instance'
 import AyahContent from 'components/molecules/AyahContent'
-import ChildrenComponent from 'components/molecules/ChildrenComponent'
+// import ChildrenComponent from 'components/molecules/ChildrenComponent'
 import DetailSurahAction from 'components/molecules/DetailSurahAction'
 import DetailSurahCard from 'components/molecules/DetailSurahCard'
 import Pagging from 'components/molecules/Pagging'
-import { AUDIO_URL, BASE_API_URL } from 'constant'
-import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react'
+import { AUDIO_URL } from 'constant'
+import { getQuranData } from 'context/action'
+import { useAppContext } from 'context/store'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-interface Verses {
-    id: Number,
-    juz_number: Number,
-    page_number: Number,
-    verse_number: Number,
-    words: String[],
-}
-
-interface Pagination{
-    current_page: Number,
-    next_page: Number,
-    per_page: Number,
-    total_pages: Number,
-    total_records: Number,
-}
-
 const DetailSurahPage = () => {
-    const [dataVerses, setDataVerses] = useState<{verses:Verses[], pagging: Pagination} | null>(null);
     const [playAyah, setPlayAyah] = useState<{ayahId: Number | null, playState: Boolean}>({ayahId: null, playState: false});
     const [ayahURL, setAyahURL] = useState("");
     const [page, setPage] = useState(1)
     const audioRef = useRef<HTMLAudioElement>(null);
+    const context = useAppContext();
     const { id } = useParams();
-
-    const fetchDataVerses = async (page:Number) => {
-        try {
-            const verses = await instance.get(BASE_API_URL + `/verses/by_chapter/${id}?language=en&words=true&page=${page}&per_page=10`);
-            const ayah = await instance.get(BASE_API_URL + `/quran/verses/uthmani?chapter_number=${id}`);
-            const recitations = await instance.get(BASE_API_URL + `/recitations/1/by_chapter/${id}`);
-
-            const fixedAyah = ayah.data.verses
-            .filter((verse: any, i: any) => {
-                return verse.id >= verses.data.verses[0].id //get data >= verse id
-            })
-            .map((verse: any) => {
-                return {
-                    id: verse.id,
-                    verseKey: verse.verse_key,
-                    textUtsmani: verse.text_uthmani,
-                }
-            })
-
-            const fixedVerses = verses.data.verses
-            .map((verse: any, i: any) => {
-                return {
-                    id: verse.id,
-                    juzNumber: verse.juz_number,
-                    pageNumber: verse.page_number,
-                    verseNumber: verse.verse_number,
-                    // words: verse.words,
-                    text: fixedAyah[i].textUtsmani,
-                    verseKey: fixedAyah[i].verse_key,
-                    audioFiles: recitations.data.audio_files[i].url
-                }
-            })
-
-            setDataVerses({verses: fixedVerses, pagging: verses.data.pagination});
-        } catch (e) {
-            throw Error();
-        }
-    }
 
     const onChangeAudio = (id:Number, ayahURL:any) => {
         setPlayAyah({ayahId: id,  playState: !playAyah.playState});
         setAyahURL(ayahURL);
-        // console.log("testing")
     }
 
     const playAudio = async() => {
@@ -91,10 +37,8 @@ const DetailSurahPage = () => {
     }, [playAyah]);
     
     useEffect(() => {
-        fetchDataVerses(page);
-    }, [page]);
-    
-
+        getQuranData(context, page, id);
+    }, [page]); 
 
     return (
         <div className='container'>
@@ -104,10 +48,10 @@ const DetailSurahPage = () => {
                 </div>
                 <div className='pagging'>
                     <Pagging 
-                        totalPage={dataVerses?.pagging.total_pages || 0} 
-                        page={dataVerses?.pagging.current_page || 0}
+                        totalPage={context?.state.pagging.total_pages || 0} 
+                        page={context?.state.pagging.current_page || 0}
                         onNext={()=> {
-                            if(page === dataVerses?.pagging.total_pages){
+                            if(page === context?.state.pagging.total_pages){
                                 setPage(page);
                             }else{
                                 setPage(page+ 1)
@@ -122,11 +66,14 @@ const DetailSurahPage = () => {
                         }}
                     />
                 </div>
-                {dataVerses &&
-                    dataVerses.verses.map((verse: any, key) => {
+                {context?.state &&
+                    context.state.verses.map((verse: any, key) => {
                         return (
                             <React.Fragment key={key}>
-                                <audio ref={audioRef} src={AUDIO_URL + ayahURL}/>
+                                <audio 
+                                    ref={audioRef} 
+                                    src={AUDIO_URL + ayahURL}
+                                />
                                 <DetailSurahAction 
                                     number={verse.verseNumber} 
                                     playState={(verse.id === playAyah.ayahId) && playAyah.playState} 

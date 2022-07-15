@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { GET_CHAPTER } from './redux/types';
-import HomePage from 'pages/HomePage';
 import 'assets/styles/index.scss';
 import MainApp from 'pages';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function App() {
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState("en");
-  const dispatch = useDispatch();
 
   const changeLanguage = () => {
     if (lang === "en") {
@@ -23,8 +19,6 @@ function App() {
         localStorage.setItem("lang", "en");
       })
     }
-
-    dispatch({ type: GET_CHAPTER, payload: ["a"] })
   }
 
   useEffect(() => {
