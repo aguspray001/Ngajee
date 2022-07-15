@@ -11,7 +11,8 @@ export const getQuranData = async (context:any, page:Number, id:String | undefin
         const verses = await instance.get(BASE_API_URL + `/verses/by_chapter/${id}?language=en&words=true&page=${page}&per_page=10`);
         const ayah = await instance.get(BASE_API_URL + `/quran/verses/uthmani?chapter_number=${id}`);
         const recitations = await instance.get(BASE_API_URL + `/recitations/1/by_chapter/${id}?page=${page}&per_page=10`);
-
+        const chapter = await instance.get(BASE_API_URL + `/chapters/${id}?language=en`);
+        console.log(chapter)
         const fixedAyah = ayah.data.verses
         .filter((verse: any, i: any) => {
             return verse.id >= verses.data.verses[0].id //get data >= verse id
@@ -31,10 +32,12 @@ export const getQuranData = async (context:any, page:Number, id:String | undefin
                 juzNumber: verse.juz_number,
                 pageNumber: verse.page_number,
                 verseNumber: verse.verse_number,
-                // words: verse.words,
                 text: fixedAyah[i].textUtsmani,
                 verseKey: fixedAyah[i].verse_key,
-                audioFiles: recitations.data.audio_files[i].url
+                audioFiles: recitations.data.audio_files[i].url,
+                chapterName: chapter.data.chapter.name_simple,
+                chapterFrom: chapter.data.chapter.revelation_place, 
+                verseCount: chapter.data.chapter.verses_count, 
             }
         })
         dispatch({type: SUCCESS_GET_DATA_QURAN, payload: {verses: fixedVerses, pagging: verses.data.pagination}})
