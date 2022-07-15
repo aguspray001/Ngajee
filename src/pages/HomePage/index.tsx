@@ -43,8 +43,8 @@ const HomePage = () => {
         <article className='container'>
             <div className='home__content'>
                 <p className='home__greeting'>Assalamu'alaikum</p>
-                <p className='home__username'>Agus Prayudi</p>
-                <SurahCard surahTitle={"Al-Fatihah"} ayahNumber={7} />
+                <p className='home__username'>Yuk, Baca Qur'an</p>
+                <SurahCard surahTitle={"List Surah"} ayahNumber={7} />
                 <div className='home-list__content'>
                     {
                         dataChapters &&

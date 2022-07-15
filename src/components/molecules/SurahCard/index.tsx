@@ -11,7 +11,7 @@ const SurahCard= ({surahTitle, ayahNumber} : surahCardProps): JSX.Element  => {
     <div className='surah__container'>
         <div className='surah__content'>
             <p>{surahTitle}</p>
-            <p>Ayah No. {ayahNumber.toString()}</p>
+            {/* <p>Ayah No. {ayahNumber.toString()}</p> */}
         </div>
         <img width={100} height={100} className='' src={quranIcon} alt='card-background'/>
     </div>
