@@ -8,8 +8,8 @@ interface surahCardProps{
 
 const SurahCard= ({surahTitle, ayahNumber} : surahCardProps): JSX.Element  => {
   return (
-    <div className='surah__container'>
-        <div className='surah__content'>
+    <div className='surah-card__container'>
+        <div className='surah-card__content'>
           {
             surahTitle !== "" ?
             <React.Fragment>

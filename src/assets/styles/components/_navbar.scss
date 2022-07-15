@@ -1,0 +1,15 @@
+.navbar{
+    &__container{
+        .back{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .back:hover{
+            color: $text-primary;
+            cursor: pointer;
+        }
+    }
+}

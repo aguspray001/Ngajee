@@ -1,8 +1,18 @@
 import React from 'react'
+import {BiArrowBack} from 'react-icons/bi';
 
-const NavBar = () => {
+interface NavBarProps{
+  onBack: () => void
+}
+
+const NavBar = ({onBack}:NavBarProps) => {
   return (
-    <div>NavBar</div>
+    <div className='navbar__container'>
+      <div className='back' onClick={onBack}>
+        <BiArrowBack/>
+        <p>Back</p>
+      </div>
+    </div>
   )
 }
 

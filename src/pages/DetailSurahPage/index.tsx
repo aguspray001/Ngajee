@@ -2,12 +2,13 @@ import AyahContent from 'components/molecules/AyahContent'
 // import ChildrenComponent from 'components/molecules/ChildrenComponent'
 import DetailSurahAction from 'components/molecules/DetailSurahAction'
 import DetailSurahCard from 'components/molecules/DetailSurahCard'
+import NavBar from 'components/molecules/NavBar'
 import Pagging from 'components/molecules/Pagging'
 import { AUDIO_URL } from 'constant'
 import { getQuranData } from 'context/action'
 import { useAppContext } from 'context/store'
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const DetailSurahPage = () => {
     const [playAyah, setPlayAyah] = useState<{ ayahId: Number | null, playState: Boolean }>({ ayahId: null, playState: false });
@@ -16,6 +17,7 @@ const DetailSurahPage = () => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const context = useAppContext();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const onChangeAudio = (ayahId: Number, ayahURL: any) => {
         setPlayAyah({ ayahId: ayahId, playState: !playAyah.playState });
@@ -46,6 +48,7 @@ const DetailSurahPage = () => {
 
     return (
         <div className='container'>
+            <NavBar onBack={()=>navigate("/home")}/>
             <div className="detail-surah-page__content">
                 <div className='card'>
                     <DetailSurahCard title={"Al-Fatihah"} meaning={"The Opening"} from={"MECCAN"} totalAyah={7} />

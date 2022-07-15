@@ -2,22 +2,18 @@
     &__content{
         display: flex;
         flex-direction: column;
-        align-items: center;
         position: relative;
+        justify-content: flex-end;
+        align-items: center;
         
         .card{
-            margin: 0 auto 4rem auto;
+            margin: 2rem 0 2rem 0;
         }
 
         .pagging{
-            position: absolute;
-            z-index: 3;
-            right: 1.7rem;
-            top: 14rem;
-
-            @include md{
-                right: 0rem;
-            }
+            display: flex;
+            align-self: flex-end;
+            margin-bottom: 2rem;
         }
 
     }
